@@ -1,0 +1,58 @@
+/* MAIN STYLES */
+/* Colors:
+    white - #F2EFDC
+    light grey - #CCCABA
+    light blue - #037E8C
+    dark blue - #024959
+    dark grey - #404040
+    red - #D83D2E
+    green - #27A513
+*/
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #F2EFDC;
+    color: #404040;
+}
+
+/* INDEX HOMEPAGE */
+/* CRYPTO TABLE */
+#main-crypto {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#crypto-table {
+    border-collapse: collapse; 
+    width: 80%;
+}
+#crypto-table th, td {
+    padding: 0.8em;
+    text-align: left;
+}
+#crypto-table tr:nth-child(even) {
+    background-color: #CCCABA;
+}
+#crypto-table thead {
+    font-style: bold;
+    background-color: #024959;
+    color: #F2EFDC;
+}
+#crypto-table thead tr th {
+    text-align: center;   
+}
+.name {
+    text-decoration: none;
+    color: #024959;
+}
+.name:hover {
+    color: #037E8C;  
+}
+.price, .marketcap {
+    text-align: right;   
+}
+.rank {
+    text-align: center;   
+}
+.percent-change {
+    text-align: center;   
+}

@@ -1,9 +1,29 @@
-head
-    title #{title}
+include includes/head.pug
 body
-    h1 Top 100 Cryptocurrencies
-    ul
-        each crypto in cryptos
-            li #{crypto.name} - $#{crypto.price_usd}
-        else 
-            li There is no data available.
+    h1 Top 10 Cryptocurrencies
+    main(id="main-crypto")
+        table(id="crypto-table")
+            thead
+                tr
+                    th Rank
+                    th Name
+                    th Price
+                    th Market Cap
+                    th Change (1h)
+                    th Change (24h)
+                    th Change (7d)
+            tbody
+                each crypto in cryptos
+                    tr
+                        td(class="rank") #{crypto.rank}
+                        td 
+                            a(class="name" href=crypto.id) #{crypto.name}
+                        td(class="price") $#{crypto.price_usd}
+                        td(class="marketcap") $#{crypto.market_cap_usd}
+                        td(class="percent-change") #{crypto.percent_change_1h}%
+                        td(class="percent-change") #{crypto.percent_change_24h}%
+                        td(class="percent-change") #{crypto.percent_change_7d}%
+                else
+                    tr
+                        td Could not retrieve data from CoinMarketCap
+    include includes/footer.pug
