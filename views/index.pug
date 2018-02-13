@@ -1,0 +1,9 @@
+head
+    title #{title}
+body
+    h1 Top 100 Cryptocurrencies
+    ul
+        each crypto in cryptos
+            li #{crypto.name} - $#{crypto.price_usd}
+        else 
+            li There is no data available.
