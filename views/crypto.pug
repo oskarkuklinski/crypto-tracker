@@ -1,6 +1,6 @@
 include includes/head.pug
 body
-    h1 #{crypto.rank}
+    h1 #{crypto[0].rank}
     main(id="crypto")
-        h2 #{crypto.name} - #{crypto.price_usd}
+        h2 #{crypto[0].name} - #{crypto[0].price_usd}
     include includes/footer.pug

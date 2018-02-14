@@ -1,6 +1,6 @@
 include includes/head.pug
 body
-    h1 Top 10 Cryptocurrencies
+    h1 List of Prices
     main(id="main-crypto")
         table(id="crypto-table")
             thead
@@ -17,7 +17,7 @@ body
                     tr
                         td(class="rank") #{crypto.rank}
                         td 
-                            a(class="name" href=crypto.id) #{crypto.name}
+                            a(class="name" href=crypto.id) #{crypto.name} (#{crypto.symbol})
                         td(class="price") $#{crypto.price_usd}
                         td(class="marketcap") $#{crypto.market_cap_usd}
                         td(class="percent-change") #{crypto.percent_change_1h}%
