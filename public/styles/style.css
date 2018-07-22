@@ -1,60 +1,38 @@
-/* MAIN STYLES */
-/* Colors:
-    white - #F2EFDC
-    light grey - #CCCABA
-    light blue - #037E8C
-    dark blue - #024959
-    dark grey - #404040
-    red - #D83D2E
-    green - #27A513
-*/
 body {
     font-family: 'Nunito', sans-serif;
     background: #141E30;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: #404040;
+    color: rgb(238,245,250);
 }
 
 /* INDEX HOMEPAGE */
-/* CRYPTO TABLE */
 #main-crypto {
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-#crypto-table {
-    border-collapse: collapse; 
-    width: 80%;
-}
-#crypto-table th, td {
-    padding: 0.8em;
-    text-align: left;
-}
-#crypto-table tr:nth-child(even) {
-    background-color: #CCCABA;
-}
-#crypto-table thead {
-    font-style: bold;
-    background-color: #024959;
-    color: #F2EFDC;
-}
-#crypto-table thead tr th {
-    text-align: center;   
-}
-.name {
+.crypto-block {
+    width: 60%;
+    height: 8rem;
+    margin-bottom: 2rem;
+    background-color: white;
+    color: #141E30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     text-decoration: none;
-    color: #024959;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    transition: all 0.2s ease-in-out
 }
-.name:hover {
-    color: #037E8C;  
+.crypto-block:hover {
+    box-shadow: 0px 0px 15px 0px rgba(15,30,40,0.75);
+    transform: scale(1.05, 1.05);
 }
-.price, .marketcap {
-    text-align: right;   
-}
-.rank {
-    text-align: center;   
-}
-.percent-change {
-    text-align: center;   
+.crypto-img {
+    width: 6rem;
+    height: 6rem;
 }

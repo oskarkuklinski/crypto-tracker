@@ -1,33 +1,19 @@
 include includes/head.pug
 body
-    h1 List of Prices
-    main(id="main-crypto")
-        table(id="crypto-table")
-            thead
-                tr
-                    th Rank
-                    th Name
-                    th Price
-                    th Market Cap
-                    th Change (1h)
-                    th Change (24h)
-                    th Change (7d)
-            tbody
-                - var counter = 0;
-                each crypto, index in cryptos
-                    //- var imageUrl = cryptoSymbolUrls[index].url;
-                    tr
-                        td(class="rank") #{crypto.rank} | 
-                            img(src="https://www.cryptocompare.com"+cryptoSymbolUrls[counter])
-                        td 
-                            a(class="name" href=crypto.id) #{crypto.name} (#{crypto.symbol})
-                        td(class="price") $#{crypto.price_usd}
-                        td(class="marketcap") $#{crypto.market_cap_usd}
-                        td(class="percent-change") #{crypto.percent_change_1h}%
-                        td(class="percent-change") #{crypto.percent_change_24h}%
-                        td(class="percent-change") #{crypto.percent_change_7d}%
-                        - counter++;
-                else
-                    tr
-                        td Could not retrieve data from CoinMarketCap
+    div(class="wrapper")
+        h1 List of Prices
+        main(id="main-crypto")
+            - var counter = 0;
+            each crypto, index in cryptos
+                a(class="crypto-block" href=crypto.id)
+                    img(class="crypto-img" src="https://www.cryptocompare.com"+cryptoSymbolUrls[counter] alt="No logo was found")
+                    span(class="crypto-name") #{crypto.name} (#{crypto.symbol})
+                    span(class="crypto-price") $#{crypto.price_usd}
+                    span(class="crypto-marketcap") $#{crypto.market_cap_usd}
+                    span(class="percent-change") #{crypto.percent_change_1h}%
+                    span(class="percent-change") #{crypto.percent_change_24h}%
+                    span(class="percent-change") #{crypto.percent_change_7d}%
+                    - counter++;
+            else
+                span Could not retrieve data from CoinMarketCap
     include includes/footer.pug

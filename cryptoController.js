@@ -3,7 +3,7 @@ const request = require('request');
 exports.crypto_list = function(req, res) {
     // coinmarketcap.com API request to get a list of cryptocurrencies
     request({
-        url: 'https://api.coinmarketcap.com/v1/ticker/?limit=20',
+        url: 'https://api.coinmarketcap.com/v1/ticker/?limit=10',
         json: true,
         method: "GET",
         timeout: 10000,

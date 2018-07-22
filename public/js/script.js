@@ -1,3 +1,4 @@
+// Setting colors of procents
 function setColor() {
     let percentElements = document.querySelectorAll(".percent-change");
     
@@ -20,6 +21,7 @@ function setColor() {
     }
 };
 
+// Changing the display of prices
 function numberDisplay() {
     let marketCapElements = document.querySelectorAll(".marketcap");
     let priceElements = document.querySelectorAll(".price");
