@@ -1,17 +1,25 @@
 {
   "name": "crypto-tracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "An app to track cryptocurrencies",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oskarkuklinski/crypto-tracker.git"
+  },
   "author": "Oskar Kuklinski",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oskarkuklinski/crypto-tracker/issues"
+  },
+  "homepage": "https://github.com/oskarkuklinski/crypto-tracker#readme",
   "dependencies": {
-    "express": "^4.16.2",
-    "mongoose": "^5.0.4",
-    "pug": "^2.0.0-rc.4",
-    "request": "^2.83.0"
+    "async": "^2.6.1",
+    "express": "^4.16.3",
+    "pug": "^2.0.3",
+    "request": "^2.87.0"
   }
 }

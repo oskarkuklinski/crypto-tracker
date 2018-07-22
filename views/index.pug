@@ -13,9 +13,12 @@ body
                     th Change (24h)
                     th Change (7d)
             tbody
-                each crypto in cryptos
+                - var counter = 0;
+                each crypto, index in cryptos
+                    //- var imageUrl = cryptoSymbolUrls[index].url;
                     tr
-                        td(class="rank") #{crypto.rank}
+                        td(class="rank") #{crypto.rank} | 
+                            img(src="https://www.cryptocompare.com"+cryptoSymbolUrls[counter])
                         td 
                             a(class="name" href=crypto.id) #{crypto.name} (#{crypto.symbol})
                         td(class="price") $#{crypto.price_usd}
@@ -23,6 +26,7 @@ body
                         td(class="percent-change") #{crypto.percent_change_1h}%
                         td(class="percent-change") #{crypto.percent_change_24h}%
                         td(class="percent-change") #{crypto.percent_change_7d}%
+                        - counter++;
                 else
                     tr
                         td Could not retrieve data from CoinMarketCap
