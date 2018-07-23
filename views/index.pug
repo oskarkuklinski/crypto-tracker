@@ -1,8 +1,8 @@
 include includes/head.pug
 body
     div(class="wrapper")
+        include includes/header.pug
         main(id="main-crypto")
-            h1 List of Prices
             - var counter = 0;
             each crypto in cryptos
                 a(class="crypto-block" href=crypto.id)
