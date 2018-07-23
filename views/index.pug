@@ -1,10 +1,10 @@
 include includes/head.pug
 body
     div(class="wrapper")
-        h1 List of Prices
         main(id="main-crypto")
+            h1 List of Prices
             - var counter = 0;
-            each crypto, index in cryptos
+            each crypto in cryptos
                 a(class="crypto-block" href=crypto.id)
                     img(class="crypto-img" src="https://www.cryptocompare.com"+cryptoSymbolUrls[counter] alt="No logo was found")
                     span(class="crypto-name") #{crypto.name} (#{crypto.symbol})
@@ -16,4 +16,6 @@ body
                     - counter++;
             else
                 span Could not retrieve data from CoinMarketCap
-    include includes/footer.pug
+            button(class="show-more" onclick="loadMoreCrypto()") &#129123;
+            include includes/footer.pug
+        div(id="loading")

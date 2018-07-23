@@ -1,3 +1,59 @@
+// Functions that are called in a callback after content is loaded
+onReady(function() {
+    setVisible();
+    loadMoreCrypto();
+    setColor();
+    numberDisplay();
+});
+
+// This function is called when all the content is loaded
+function onReady(callback) {
+    var intervalId = window.setInterval(function() {
+        // Wait every 2 seconds until the page content loads
+        if (document.getElementsByTagName('body')[0] !== undefined) {
+            window.clearInterval(intervalId);
+            callback.call(this);
+        }
+    }, 2000);
+}
+
+// Function for creating a counter that increments with every call
+function createCounter() {
+    let counter = 4;
+    const myFunction = function() {
+        counter += 5;
+        return counter
+    }
+    return myFunction
+};
+
+// Global variable assigned as a return value of the createCounter()
+let increment = createCounter();
+
+// Load more cryptocurrencies on a button click
+function loadMoreCrypto() {
+    let counter = increment();
+    let cryptoBlocks = document.querySelectorAll('.crypto-block');
+    console.log(counter);
+    for (var i=0; i<cryptoBlocks.length; i++) {
+        if (i > counter) {
+            cryptoBlocks[i].style.display = 'none';   
+        } else {
+            cryptoBlocks[i].style.display = 'flex';   
+        }
+    }
+}
+
+// Change the style of loading page and the main page
+function setVisible() {
+    document.querySelector('#main-crypto').style.display = "flex";
+    document.querySelector('#loading').style.zIndex = "-1";
+    setTimeout(function() {
+        document.querySelector('#loading').style.display = "none";
+        document.querySelector('#main-crypto').style.opacity = "1";
+    }, 500);
+}
+
 // Setting colors of procents
 function setColor() {
     let percentElements = document.querySelectorAll(".percent-change");
@@ -23,24 +79,21 @@ function setColor() {
 
 // Changing the display of prices
 function numberDisplay() {
-    let marketCapElements = document.querySelectorAll(".marketcap");
-    let priceElements = document.querySelectorAll(".price");
+    let marketCapElements = document.querySelectorAll(".crypto-marketcap");
+    let priceElements = document.querySelectorAll(".crypto-price");
     
     // Elements of the Market Cap
     for (var element of marketCapElements) {
         // Remove the fractional digits from the string.
         element.textContent = element.textContent.replace(".0", "");
             
-        // Number spacing with regex
-        element.textContent = element.textContent.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
+        // Coma in the thousands with regex
+        element.textContent = element.textContent.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     
     // Elements of the Price
     for (var element of priceElements) {
-        // Number spacing with regex
-        element.textContent = element.textContent.replace(/(\d)(?=(\d{3})+\.[^.]*$)/g, '$1 ');  
+        // Coma in the thousands with regex
+        element.textContent = element.textContent.replace(/\B(?=(\d{3})+(?!\d))/g, ",");  
     }
 };
-
-setColor();
-numberDisplay();
