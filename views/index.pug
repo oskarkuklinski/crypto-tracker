@@ -5,7 +5,7 @@ body
         main(id="main-crypto")
             - var counter = 0;
             each crypto in cryptos
-                a(class="crypto-block" href=crypto.id)
+                a(class="crypto-block" href='/crypto/'+crypto.id)
                     img(class="crypto-img" src="https://www.cryptocompare.com"+cryptoSymbolUrls[counter] alt="No logo was found")
                     span(class="crypto-name") #{crypto.name} (#{crypto.symbol})
                     span(class="crypto-price") $#{crypto.price_usd}
