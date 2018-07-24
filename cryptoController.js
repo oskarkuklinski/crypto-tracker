@@ -1,6 +1,7 @@
 const request = require('request');
 
 exports.crypto_list = function(req, res) {
+    let reg_success = req.session.reg_session;
     // coinmarketcap.com API request to get a list of cryptocurrencies
     request({
         url: 'https://api.coinmarketcap.com/v1/ticker/?limit=200',
@@ -43,7 +44,7 @@ exports.crypto_list = function(req, res) {
                     cryptoSymbolUrls.push("No existing logo");
                 }
             });
-            res.render('index', {title: "Check your cryptocurrency!", cryptos, cryptoSymbolUrls });
+            res.render('index', {title: "Check your cryptocurrency!", cryptos, cryptoSymbolUrls, message: req.flash('success') });
         });
     });
 };

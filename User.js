@@ -17,10 +17,20 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    passwordConfirm: {
-        type: String,
-        required: true
+    createdAt: {
+        type: Date,
+        required: false
     }
+});
+
+UserSchema.pre('save', function(next) {
+    this.email = this
+    .email
+    .toLowerCase(); // ensure that e-mail is in lower case
+    
+    let currentDate = new Date().getTime();
+    this.updatedAt = currentDate;
+    next();
 });
 
 var User = mongoose.model('User', UserSchema);

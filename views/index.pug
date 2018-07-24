@@ -3,6 +3,7 @@ body
     div(class="wrapper")
         include includes/header.pug
         main(id="main-crypto")
+            h1 #{message}
             - var counter = 0;
             each crypto in cryptos
                 a(class="crypto-block" href='/crypto/'+crypto.id)
@@ -18,4 +19,5 @@ body
                 span Could not retrieve data from CoinMarketCap
             button(class="show-more" onclick="loadMoreCrypto()") &#129123;
             include includes/footer.pug
+            script(type="text/javascript" src="js/script.js")
         div(id="loading")

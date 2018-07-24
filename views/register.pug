@@ -1,0 +1,11 @@
+include includes/head.pug
+body
+    div(class="wrapper")
+        h1 #{message}
+        form(method="post" action="/register")
+            input(type="email" name="email" placeholder="enter e-mail")
+            input(type="text" name="username" placeholder="enter username")
+            input(type="password" name="password" placeholder="enter password")
+            input(type="password" name="passwordConfirm" placeholder="enter password again")
+            input(type="submit" name="submit" value="submit")
+    include includes/footer.pug
