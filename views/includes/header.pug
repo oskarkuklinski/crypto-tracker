@@ -3,6 +3,11 @@ header
         span Crypto Tracker
     nav(class="navigation")
         div(class="nav-option")
-            a(href="/login") LOG IN
-            span or
-            a(href="/register") REGISTER
+            if (username != null || username != undefined)
+                span Welcome #{username}!
+                a(href='/') PROFILE
+                a(href='/') LOG OUT
+            else 
+                a(href="/login") LOG IN
+                span or
+                a(href="/register") REGISTER

@@ -1,4 +1,5 @@
 const request = require('request');
+const session = require('express-session');
 
 exports.crypto_list = function(req, res) {
     let reg_success = req.session.reg_session;
@@ -44,7 +45,14 @@ exports.crypto_list = function(req, res) {
                     cryptoSymbolUrls.push("No existing logo");
                 }
             });
-            res.render('index', {title: "Check your cryptocurrency!", cryptos, cryptoSymbolUrls, message: req.flash('success') });
+            
+            if (req.session.user != null || req.session.user != undefined) {
+                // If user is logged in 
+                res.render('index', {title: "Check your cryptocurrency!", cryptos, cryptoSymbolUrls, message: req.flash('main'), username: req.session.user.username }); 
+            } else {
+                // If user is not logged in
+                res.render('index', {title: "Check your cryptocurrency!", cryptos, cryptoSymbolUrls, message: req.flash('main') }); 
+            }
         });
     });
 };

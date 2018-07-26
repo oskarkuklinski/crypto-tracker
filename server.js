@@ -76,7 +76,7 @@ app.post('/register', function(req, res) {
         newUser.save().then((error) => {
             if (error) {
                 // go to the main page and send a message if everything was ok
-                req.flash('success', 'Registration complete! You can log in now.');
+                req.flash('main', 'Registration complete! You can log in now.');
                 return res.status(201).redirect('/');
             } else {
                 if (error.code === 11000) { // if that record already exists
@@ -95,13 +95,49 @@ app.post('/register', function(req, res) {
     }
 });
 
-// 3. Login page
+// 3. GET Login page
 // -----------------------------------------
 app.get('/login', function(req, res) {
-    res.render('login', { title: "Crypto Tracker | Log In" } );
+    res.render('login', { title: "Crypto Tracker | Log In", message: req.flash('fail') } );
 });
 
-// 4. Page with the details of a single cryptocurrency
+// 4. POST login
+// -----------------------------------------
+app.post('/login', function(req, res) {
+    // Login provided by email and password
+    let {email, password} = req.body;
+    User.findOne({email: email}, 'email username password', (err, userData) => {
+        if (!err) {
+            let passwordCheck = bcrypt.compareSync(password, userData.password);
+            // if the hashed password from DB is the same as one provided by the user:
+            if (passwordCheck) {
+                // save user data into session
+                req.session.user = {
+                    email: userData.email,
+                    username: userData.username,
+                    id: userData._id };
+                // user session will expire in three days
+                req.session.user.expires = new Date(Date.now() + 3 * 24 * 3600 * 1000);
+                req.flash('main', 'You are now logged in!');
+                res.status(200).redirect('/');
+            } else {
+                req.flash('fail', 'Incorrect password');
+                res.status(401).redirect('/login');
+            }
+        } else {
+            res.status(401).send('Invalid login credentials');   
+        }
+    })
+});
+
+// 5. POST Log out
+// ------------------------------------------
+app.post('/logout', function(req, res) {
+    delete req.session.user;
+    req.flash('main', 'Logout successful!');
+});
+
+// 6. Page with the details of a single cryptocurrency
 // -------------------------------------------
 app.get('/crypto/:cryptoId', crypto.crypto_details);
 
