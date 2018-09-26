@@ -3,5 +3,9 @@ body
     include includes/header.pug
     h1 #{crypto[0].rank}
     main(id="crypto")
-        h2 #{crypto[0].name} - #{crypto[0].price_usd}
+        img(class="crypto-img" id=crypto[0].symbol alt="No logo was found")
+        h2 
+            span(class="crypto-rank") #{crypto[0].rank}
+            |. #{crypto[0].name} - #{crypto[0].price_usd}
     include includes/footer.pug
+    script(type="text/javascript" src="../js/crypto_page.js")

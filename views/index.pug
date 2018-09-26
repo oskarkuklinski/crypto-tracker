@@ -4,19 +4,21 @@ body
         include includes/header.pug
         main(id="main-crypto")
             h1 #{message}
-            - var counter = 0;
+            h2 Scroll down or search here:
+            input(id="search-field" type="text")
+            br
             each crypto in cryptos
                 a(class="crypto-block" href='/crypto/'+crypto.id)
-                    img(class="crypto-img" src="https://www.cryptocompare.com"+cryptoSymbolUrls[counter] alt="No logo was found")
-                    span(class="crypto-name") #{crypto.name} (#{crypto.symbol})
+                    img(class="crypto-img" alt="No logo was found")
+                    span(class="crypto-name" id=crypto.symbol) #{crypto.name} (#{crypto.symbol})
                     span(class="crypto-price") $#{crypto.price_usd}
                     span(class="crypto-marketcap") $#{crypto.market_cap_usd}
                     span(class="percent-change") #{crypto.percent_change_1h}%
                     span(class="percent-change") #{crypto.percent_change_24h}%
                     span(class="percent-change") #{crypto.percent_change_7d}%
-                    - counter++;
             else
                 span Could not retrieve data from CoinMarketCap
+            h3(id="search-error")
             button(class="show-more" onclick="loadMoreCrypto()") &#129123;
             include includes/footer.pug
             script(type="text/javascript" src="js/script.js")

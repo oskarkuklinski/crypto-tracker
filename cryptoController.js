@@ -5,7 +5,7 @@ exports.crypto_list = function(req, res) {
     let reg_success = req.session.reg_session;
     // coinmarketcap.com API request to get a list of cryptocurrencies
     request({
-        url: 'https://api.coinmarketcap.com/v1/ticker/?limit=200',
+        url: 'https://api.coinmarketcap.com/v1/ticker/?limit=100',
         json: true,
         method: "GET",
         timeout: 10000,
@@ -22,38 +22,7 @@ exports.crypto_list = function(req, res) {
             cryptoSymbols.push(crypto.symbol);
         });
         
-        // Another request for a cryptocompare.com to get the logos of cryptocurrencies
-        request({
-            url: 'https://www.cryptocompare.com/api/data/coinlist/',
-            json: true,
-            method: "GET",
-            timeout: 10000,
-            followRedirect: true,
-            maxRedirects: 10
-        },(error, response, body) => {
-            if (error) {
-                return console.error('upload failed: ', error);
-            }
-            // Uploaded successfully
-            // Take an image link from each of the crypto symbols listed
-            // eval() changes string to an expression that allows for reaching the image link
-            var cryptoSymbolUrls = [];
-            cryptoSymbols.forEach(function(symbol) {
-                if (eval("body.Data."+symbol) != undefined) {
-                    cryptoSymbolUrls.push(eval("body.Data."+symbol+".ImageUrl"));
-                } else {
-                    cryptoSymbolUrls.push("No existing logo");
-                }
-            });
-            
-            if (req.session.user != null || req.session.user != undefined) {
-                // If user is logged in 
-                res.render('index', {title: "Check your cryptocurrency!", cryptos, cryptoSymbolUrls, message: req.flash('main'), username: req.session.user.username }); 
-            } else {
-                // If user is not logged in
-                res.render('index', {title: "Check your cryptocurrency!", cryptos, cryptoSymbolUrls, message: req.flash('main') }); 
-            }
-        });
+        res.render('index', {title: "Check your cryptocurrency!", message: "Check current top 100 cryptocurrencies", cryptos});
     });
 };
 
@@ -71,6 +40,6 @@ exports.crypto_details = function(req, res) {
             return console.error('upload failed: ', error);
         }
         // Uploaded successfully
-        res.render('crypto', {title: 'Crypto | ' + body.name, crypto: body }); 
+        res.render('crypto', {title: 'Crypto | ' + body[0].name, crypto: body }); 
     });
 };

@@ -80,7 +80,7 @@ app.post('/register', function(req, res) {
                 return res.status(201).redirect('/');
             } else {
                 if (error.code === 11000) { // if that record already exists
-                    return res.status(409).send('user already exists!');
+                    return res.status(409).redirect('/register');
                 } else {
                     // any other error returns this
                     console.log(JSON.stringify(error, null, 2));
